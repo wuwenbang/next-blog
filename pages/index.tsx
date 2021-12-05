@@ -1,24 +1,44 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import image from 'assets/images/cat.jpg'
-const Home: NextPage = () => {
+import { useEffect, useState } from 'react'
+import { UAParser } from 'ua-parser-js'
+interface Props {
+  browser: {
+    name: string
+    version: string
+    major: string
+  }
+}
 
+const Home: NextPage<Props> = ({ browser }) => {
+  const [width, setWidth] = useState(0)
+  useEffect(() => {
+    const w = document.documentElement.clientWidth
+    setWidth(w)
+  }, [])
   return (
-    <div className={styles.container}>
-      <img src={image.src} width={100} height={100} />
-      <Image width={100} height={100} src={image.src} alt="" />
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Hello
-          <Link href="/posts/first-post">
-            <a>第一篇文章</a>
-          </Link>
-        </h1>
-      </main>
+    <div>
+      <ul>
+        <Link href="/posts">
+          <a> Link to post index</a>
+        </Link>
+      </ul>
+      <div>
+        <h1>你的浏览器名称是：{browser.name}</h1>
+        <h1>你的浏览器宽度是：{width}</h1>
+      </div>
     </div>
   )
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const ua = context.req.headers['user-agent']
+  const result = new UAParser(ua).getResult()
+  return {
+    props: {
+      browser: result.browser,
+    },
+  }
+}
