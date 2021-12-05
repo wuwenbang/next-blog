@@ -6,8 +6,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "migration:create": "typeorm migration:create",
     "migration:run": "typeorm migration:run",
-    "migration:revert": "typeorm migration:revert"
+    "migration:revert": "typeorm migration:revert",
+    "entity:create": "typeorm entity:create"
   },
   "dependencies": {
     "@babel/cli": "^7.16.0",
