@@ -46,8 +46,18 @@ var CreatePosts1639057977475 = /*#__PURE__*/function () {
                     name: 'content',
                     type: 'text'
                   }, {
-                    name: 'author_id',
+                    name: 'authorId',
                     type: 'int'
+                  }, {
+                    name: 'craeteTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
+                  }, {
+                    name: 'updateTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
                   }]
                 }));
 

@@ -43,8 +43,18 @@ var CreateUsers1638978509581 = /*#__PURE__*/function () {
                     name: 'username',
                     type: 'varchar'
                   }, {
-                    name: 'password_digest',
+                    name: 'passwordDigest',
                     type: 'varchar'
+                  }, {
+                    name: 'craeteTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
+                  }, {
+                    name: 'updateTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
                   }]
                 }));
 

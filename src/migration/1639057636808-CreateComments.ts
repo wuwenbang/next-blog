@@ -13,9 +13,21 @@ export class CreateComments1639057636808 implements MigrationInterface {
             isGenerated: true,
             generationStrategy: 'increment',
           },
-          { name: 'author_id', type: 'int' },
-          { name: 'post_id', type: 'int' },
+          { name: 'authorId', type: 'int' },
+          { name: 'postId', type: 'int' },
           { name: 'content', type: 'text' },
+          {
+            name: 'craeteTime',
+            type: 'timestamp',
+            isNullable: false,
+            default: 'now()',
+          },
+          {
+            name: 'updateTime',
+            type: 'timestamp',
+            isNullable: false,
+            default: 'now()',
+          },
         ],
       })
     )

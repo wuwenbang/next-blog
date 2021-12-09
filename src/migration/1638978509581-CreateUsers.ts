@@ -14,7 +14,19 @@ export class CreateUsers1638978509581 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           { name: 'username', type: 'varchar' },
-          { name: 'password_digest', type: 'varchar' },
+          { name: 'passwordDigest', type: 'varchar' },
+          {
+            name: 'craeteTime',
+            type: 'timestamp',
+            isNullable: false,
+            default: 'now()',
+          },
+          {
+            name: 'updateTime',
+            type: 'timestamp',
+            isNullable: false,
+            default: 'now()',
+          },
         ],
       })
     )

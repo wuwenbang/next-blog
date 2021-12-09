@@ -40,14 +40,24 @@ var CreateComments1639057636808 = /*#__PURE__*/function () {
                     isGenerated: true,
                     generationStrategy: 'increment'
                   }, {
-                    name: 'author_id',
+                    name: 'authorId',
                     type: 'int'
                   }, {
-                    name: 'post_id',
+                    name: 'postId',
                     type: 'int'
                   }, {
                     name: 'content',
                     type: 'text'
+                  }, {
+                    name: 'craeteTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
+                  }, {
+                    name: 'updateTime',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
                   }]
                 }));
 
