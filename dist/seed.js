@@ -10,50 +10,12 @@ require("reflect-metadata");
 
 var _typeorm = require("typeorm");
 
-var _Post = require("./entity/Post");
-
 (0, _typeorm.createConnection)().then( /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection) {
-    var posts, i, post;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return connection.manager.find(_Post.Post);
-
-          case 2:
-            posts = _context.sent;
-
-            if (!(posts.length === 0)) {
-              _context.next = 12;
-              break;
-            }
-
-            i = 1;
-
-          case 5:
-            if (!(i <= 10)) {
-              _context.next = 12;
-              break;
-            }
-
-            post = new _Post.Post({
-              title: "Post".concat(i),
-              content: "\u6211\u7684\u7B2C".concat(i, "\u7BC7\u6587\u7AE0")
-            });
-            _context.next = 9;
-            return connection.manager.save(post);
-
-          case 9:
-            i++;
-            _context.next = 5;
-            break;
-
-          case 12:
-            connection.close();
-
-          case 13:
           case "end":
             return _context.stop();
         }

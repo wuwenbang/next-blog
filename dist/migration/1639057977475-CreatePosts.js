@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CreatePost1638174612207 = void 0;
+exports.CreatePosts1639057977475 = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -17,12 +17,12 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _typeorm = require("typeorm");
 
-var CreatePost1638174612207 = /*#__PURE__*/function () {
-  function CreatePost1638174612207() {
-    (0, _classCallCheck2["default"])(this, CreatePost1638174612207);
+var CreatePosts1639057977475 = /*#__PURE__*/function () {
+  function CreatePosts1639057977475() {
+    (0, _classCallCheck2["default"])(this, CreatePosts1639057977475);
   }
 
-  (0, _createClass2["default"])(CreatePost1638174612207, [{
+  (0, _createClass2["default"])(CreatePosts1639057977475, [{
     key: "up",
     value: function () {
       var _up = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(queryRunner) {
@@ -45,13 +45,13 @@ var CreatePost1638174612207 = /*#__PURE__*/function () {
                   }, {
                     name: 'content',
                     type: 'text'
+                  }, {
+                    name: 'author_id',
+                    type: 'int'
                   }]
                 }));
 
               case 2:
-                return _context.abrupt("return", _context.sent);
-
-              case 3:
               case "end":
                 return _context.stop();
             }
@@ -77,9 +77,6 @@ var CreatePost1638174612207 = /*#__PURE__*/function () {
                 return queryRunner.dropTable('posts');
 
               case 2:
-                return _context2.abrupt("return", _context2.sent);
-
-              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -94,7 +91,7 @@ var CreatePost1638174612207 = /*#__PURE__*/function () {
       return down;
     }()
   }]);
-  return CreatePost1638174612207;
+  return CreatePosts1639057977475;
 }();
 
-exports.CreatePost1638174612207 = CreatePost1638174612207;
+exports.CreatePosts1639057977475 = CreatePosts1639057977475;
