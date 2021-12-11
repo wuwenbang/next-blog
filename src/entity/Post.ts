@@ -1,5 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
+import { User } from './User'
+import { Comment } from './Comment'
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn('increment')
@@ -19,6 +29,13 @@ export class Post {
 
   @UpdateDateColumn('timestamp')
   updateTime: number
+
+  @OneToOne(() => User)
+  @JoinColumn()
+  author: User
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[]
 
   constructor(attributes: Partial<Post>) {
     Object.assign(this, attributes)

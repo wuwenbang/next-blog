@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { Post } from './Post'
+import { Comment } from './Comment'
 
 @Entity()
 export class User {
@@ -22,6 +25,11 @@ export class User {
 
   @UpdateDateColumn('timestamp')
   updateTime: number
+
+  @OneToMany(() => Post, (post) => post.author)
+  posts: Post[]
+  @OneToMany(() => Comment, (comment) => comment.author)
+  comments: Comment[]
 
   constructor(attributes: Partial<User>) {
     Object.assign(this, attributes)
