@@ -87,6 +87,9 @@ var CreateComments1639057636808 = /*#__PURE__*/function () {
                 return queryRunner.dropTable('comments');
 
               case 2:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 3:
               case "end":
                 return _context2.stop();
             }

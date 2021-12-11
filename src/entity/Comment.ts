@@ -1,15 +1,21 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 
 @Entity()
-export class Post {
+export class Comment {
   @PrimaryGeneratedColumn('increment')
   id: string
 
   @Column('int')
   authorId: number
 
-  @Column('varchar')
-  title: string
+  @Column('int')
+  postId: number
 
   @Column('text')
   content: string
@@ -20,7 +26,7 @@ export class Post {
   @UpdateDateColumn('timestamp')
   updateTime: number
 
-  constructor(attributes: Partial<Post>) {
+  constructor(attributes: Partial<Comment>) {
     Object.assign(this, attributes)
   }
 }

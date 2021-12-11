@@ -1,6 +1,6 @@
 import { getPosts } from 'lib/posts'
 import { GetStaticProps, NextPage } from 'next'
-import { Post } from 'types/post'
+import { Post } from 'types'
 import Link from 'next/link'
 interface Props {
   posts: Post[]

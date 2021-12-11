@@ -84,6 +84,9 @@ var CreateUsers1638978509581 = /*#__PURE__*/function () {
                 return queryRunner.dropTable('users');
 
               case 2:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 3:
               case "end":
                 return _context2.stop();
             }

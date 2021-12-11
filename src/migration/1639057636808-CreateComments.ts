@@ -34,6 +34,6 @@ export class CreateComments1639057636808 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('comments')
+    return await queryRunner.dropTable('comments')
   }
 }

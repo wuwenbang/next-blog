@@ -16,11 +16,20 @@ docker exec -it [CONTAINER_ID] bash
 - 进入 PostgreSQL
 
 ```bash
-psql -U blog
+psql -U blog·
 ```
 
 - 创建数据库
 
 ```sql
 CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+```
+
+- run dev script
+
+```json
+{
+  "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx", // mac
+  "dev": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"" // windows
+}
 ```

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useMemo, useState } from 'react'
-import { Post } from 'types/post'
+import { Post } from 'types'
 import useAsyncEffect from './useAsyncEffect'
 
 export default function usePosts() {
