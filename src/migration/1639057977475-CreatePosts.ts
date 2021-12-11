@@ -17,7 +17,7 @@ export class CreatePosts1639057977475 implements MigrationInterface {
           { name: 'content', type: 'text' },
           { name: 'authorId', type: 'int' },
           {
-            name: 'craeteTime',
+            name: 'createTime',
             type: 'timestamp',
             isNullable: false,
             default: 'now()',

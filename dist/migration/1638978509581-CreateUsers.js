@@ -46,7 +46,7 @@ var CreateUsers1638978509581 = /*#__PURE__*/function () {
                     name: 'passwordDigest',
                     type: 'varchar'
                   }, {
-                    name: 'craeteTime',
+                    name: 'createTime',
                     type: 'timestamp',
                     isNullable: false,
                     "default": 'now()'

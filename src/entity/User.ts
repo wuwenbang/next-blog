@@ -9,7 +9,7 @@ import {
 import { Post } from './Post'
 import { Comment } from './Comment'
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: string
@@ -20,10 +20,10 @@ export class User {
   @Column('varchar')
   passwordDigest: string
 
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createTime: number
 
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updateTime: number
 
   @OneToMany(() => Post, (post) => post.author)
@@ -31,7 +31,7 @@ export class User {
   @OneToMany(() => Comment, (comment) => comment.author)
   comments: Comment[]
 
-  constructor(attributes: Partial<User>) {
+  constructor(attributes?: Partial<User>) {
     Object.assign(this, attributes)
   }
 }

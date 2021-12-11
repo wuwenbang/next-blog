@@ -49,7 +49,7 @@ var CreatePosts1639057977475 = /*#__PURE__*/function () {
                     name: 'authorId',
                     type: 'int'
                   }, {
-                    name: 'craeteTime',
+                    name: 'createTime',
                     type: 'timestamp',
                     isNullable: false,
                     "default": 'now()'

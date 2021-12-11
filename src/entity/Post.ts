@@ -10,7 +10,7 @@ import {
 } from 'typeorm'
 import { User } from './User'
 import { Comment } from './Comment'
-@Entity()
+@Entity('posts')
 export class Post {
   @PrimaryGeneratedColumn('increment')
   id: string
@@ -24,10 +24,10 @@ export class Post {
   @Column('text')
   content: string
 
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createTime: number
 
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updateTime: number
 
   @OneToOne(() => User)

@@ -19,9 +19,21 @@ var _initializerWarningHelper2 = _interopRequireDefault(require("@babel/runtime/
 
 var _typeorm = require("typeorm");
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var _Post = require("./Post");
 
-var Comment = (_dec = (0, _typeorm.Entity)(), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('int'), _dec4 = (0, _typeorm.Column)('int'), _dec5 = (0, _typeorm.Column)('text'), _dec6 = (0, _typeorm.CreateDateColumn)('timestamp'), _dec7 = (0, _typeorm.UpdateDateColumn)('timestamp'), _dec(_class = (_class2 = function Comment(attributes) {
+var _User = require("./User");
+
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
+
+var Comment = (_dec = (0, _typeorm.Entity)('comments'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('int'), _dec4 = (0, _typeorm.Column)('int'), _dec5 = (0, _typeorm.Column)('text'), _dec6 = (0, _typeorm.CreateDateColumn)(), _dec7 = (0, _typeorm.UpdateDateColumn)(), _dec8 = (0, _typeorm.ManyToOne)(function () {
+  return _Post.Post;
+}, function (post) {
+  return post.comments;
+}), _dec9 = (0, _typeorm.ManyToOne)(function () {
+  return _User.User;
+}, function (author) {
+  return author.comments;
+}), _dec(_class = (_class2 = function Comment(attributes) {
   (0, _classCallCheck2["default"])(this, Comment);
   (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
   (0, _initializerDefineProperty2["default"])(this, "authorId", _descriptor2, this);
@@ -29,6 +41,8 @@ var Comment = (_dec = (0, _typeorm.Entity)(), _dec2 = (0, _typeorm.PrimaryGenera
   (0, _initializerDefineProperty2["default"])(this, "content", _descriptor4, this);
   (0, _initializerDefineProperty2["default"])(this, "createTime", _descriptor5, this);
   (0, _initializerDefineProperty2["default"])(this, "updateTime", _descriptor6, this);
+  (0, _initializerDefineProperty2["default"])(this, "post", _descriptor7, this);
+  (0, _initializerDefineProperty2["default"])(this, "author", _descriptor8, this);
   Object.assign(this, attributes);
 }, (_descriptor = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "id", [_dec2], {
   configurable: true,
@@ -56,6 +70,16 @@ var Comment = (_dec = (0, _typeorm.Entity)(), _dec2 = (0, _typeorm.PrimaryGenera
   writable: true,
   initializer: null
 }), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "updateTime", [_dec7], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: null
+}), _descriptor7 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "post", [_dec8], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: null
+}), _descriptor8 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "author", [_dec9], {
   configurable: true,
   enumerable: true,
   writable: true,

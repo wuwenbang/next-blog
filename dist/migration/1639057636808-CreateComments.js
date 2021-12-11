@@ -49,7 +49,7 @@ var CreateComments1639057636808 = /*#__PURE__*/function () {
                     name: 'content',
                     type: 'text'
                   }, {
-                    name: 'craeteTime',
+                    name: 'createTime',
                     type: 'timestamp',
                     isNullable: false,
                     "default": 'now()'

@@ -10,7 +10,7 @@ import {
 import { Post } from './Post'
 import { User } from './User'
 
-@Entity()
+@Entity('comments')
 export class Comment {
   @PrimaryGeneratedColumn('increment')
   id: string
@@ -24,10 +24,10 @@ export class Comment {
   @Column('text')
   content: string
 
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createTime: number
 
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updateTime: number
 
   @ManyToOne(() => Post, (post) => post.comments)
