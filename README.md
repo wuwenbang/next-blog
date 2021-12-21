@@ -16,20 +16,29 @@ docker exec -it [CONTAINER_ID] bash
 - 进入 PostgreSQL
 
 ```bash
-psql -U blog·
+psql -U blog
 ```
 
-- 创建数据库
+- PostgreSQL 命令
 
 ```sql
+-- 创建数据库
 CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+-- 连接数据库
+\c blog_development
+-- 展示表
+\dt
+-- 展示数据
+select * from users;
 ```
 
-- run dev script
+- 创建数据
 
-```json
-{
-  "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx", // mac
-  "dev": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"" // windows
-}
+```bash
+# 数据迁移运行
+yarn migration:run
+# 运行项目开发环境
+yarn dev
+# 数据填充
+node dist/seed.js
 ```
