@@ -2,6 +2,7 @@ import { getDatabaseConnection } from 'lib/getDatabaseConnection'
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { createConnection, getConnection } from 'typeorm'
 import { UAParser } from 'ua-parser-js'
 interface Props {
   browser: {
