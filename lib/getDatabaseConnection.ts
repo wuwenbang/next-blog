@@ -1,19 +1,36 @@
-import { createConnection, getConnectionManager } from 'typeorm'
+import { createConnection, getConnectionManager } from 'typeorm';
+import 'reflect-metadata';
+import { Post } from 'src/entity/Post';
+import { User } from 'src/entity/User';
+import { Comment } from 'src/entity/Comment';
+import config from 'ormconfig.json';
+
+const create = () => {
+  // @ts-ignore
+  return createConnection({
+    ...config,
+    entities: [Post, User, Comment],
+  });
+};
 
 const promise = (async function () {
-  const manager = getConnectionManager()
+  const manager = getConnectionManager();
+
   if (!manager.has('default')) {
-    return createConnection()
+    console.log(1);
+    return create();
   } else {
-    const current = manager.get('default')
+    const current = manager.get('default');
     if (current.isConnected) {
-      return current
+      console.log(2);
+      return current;
     } else {
-      return createConnection()
+      console.log(3);
+      return create();
     }
   }
-})()
+})();
 
-export const getDatabaseConnection = async () => {
-  return promise
+export default function getDatabaseConnection() {
+  return promise;
 }
