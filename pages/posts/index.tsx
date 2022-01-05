@@ -1,6 +1,6 @@
 import { getPosts } from 'lib/posts'
 import { GetStaticProps, NextPage } from 'next'
-import { Post } from 'types'
+import { Post } from 'src/entity/Post'
 import Link from 'next/link'
 interface Props {
   posts: Post[]
@@ -15,7 +15,7 @@ const PostsIndex: NextPage<Props> = ({ posts }) => {
           <li key={post.id}>
             <Link href={`/posts/[id]`} as={`/posts/${post.id}`}>
               <a>
-                {post.title}：{post.date}
+                {post.title}：{post.content}
               </a>
             </Link>
           </li>

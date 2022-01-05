@@ -1,3 +1,4 @@
+import { getDatabaseConnection } from 'lib/getDatabaseConnection'
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -34,6 +35,8 @@ const Home: NextPage<Props> = ({ browser }) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const connection = await getDatabaseConnection()
+  console.log('connection', connection)
   const ua = context.req.headers['user-agent']
   const result = new UAParser(ua).getResult()
   return {
