@@ -22,7 +22,6 @@ const SignUp: NextPage = () => {
   return (
     <>
       <h1>注册</h1>
-      {JSON.stringify(formData)}
       <form onSubmit={onSubmit}>
         <div>
           <span>用户名</span>
