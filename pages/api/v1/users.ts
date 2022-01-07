@@ -1,7 +1,7 @@
 import getDatabaseConnection from 'lib/getDatabaseConnection';
 import { NextApiHandler } from 'next';
 import { User } from 'src/entity/User';
-import md5 from 'md5';
+
 const users: NextApiHandler = async (req, res) => {
   const { username, password, passwordConfirmation } = req.body as {
     username: string;

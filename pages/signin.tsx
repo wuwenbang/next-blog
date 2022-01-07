@@ -11,9 +11,9 @@ const SignUp: NextPage = () => {
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios
-      .post(`api/v1/users`, formData)
+      .post(`api/v1/sessions`, formData)
       .then(() => {
-        alert("注册成功！")
+        alert("登录成功！")
         window.location.href = "/signin"
       })
       .catch((error: AxiosError) => {
@@ -24,7 +24,7 @@ const SignUp: NextPage = () => {
   };
   return (
     <>
-      <h1>注册</h1>
+      <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <div>
           <span>用户名</span>
@@ -59,7 +59,7 @@ const SignUp: NextPage = () => {
             }}
           />
         </div>
-        <button type="submit"> 注册 </button>
+        <button type="submit"> 登录 </button>
       </form>
     </>
   );
