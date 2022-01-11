@@ -9,26 +9,23 @@ const users: NextApiHandler = async (req, res) => {
     password: string;
     passwordConfirmation: string;
   };
-  let errorMessage = '';
-
-  // 校验
-  if (username.trim() === '') {
-    errorMessage = '用户名为空';
-  } else if (password !== passwordConfirmation) {
-    errorMessage = '密码不一致';
-    res.statusCode = 422;
-  }
   res.setHeader('Content-Type', 'application/json');
-  if (errorMessage) {
-    res.write(JSON.stringify({ message: errorMessage }));
+  const user = new User();
+  user.username = username.trim();
+  user.password = password;
+  user.passwordConfirmation = passwordConfirmation;
+  const error = await user.validate();
+  if (error) {
+    res.statusCode = 422;
+    res.write(JSON.stringify({ error }));
   } else {
     const connection = await getDatabaseConnection();
-    const user = new User();
-    user.username = username;
-    user.passwordDigest = md5(password);
     await connection.manager.save(user);
     res.statusCode = 200;
-    res.write(JSON.stringify(user));
+    const { id, username, createTime, updateTime, posts, comments } = user;
+    res.write(
+      JSON.stringify({ id, username, createTime, updateTime, posts, comments })
+    );
   }
   res.end();
 };
