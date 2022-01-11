@@ -13,12 +13,12 @@ const SignUp: NextPage = () => {
     axios
       .post(`api/v1/users`, formData)
       .then(() => {
-        alert("注册成功！")
-        window.location.href = "/signin"
+        alert('注册成功！');
+        window.location.href = '/signin';
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
-          alert(JSON.stringify(error.response.data));
+          alert(error.response.data.error);
         }
       });
   };

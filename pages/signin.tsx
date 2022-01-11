@@ -2,23 +2,22 @@ import axios, { AxiosError } from 'axios';
 import { NextPage } from 'next';
 import { FormEventHandler, useState } from 'react';
 
-const SignUp: NextPage = () => {
+const SignIn: NextPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    passwordConfirmation: '',
   });
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios
       .post(`api/v1/sessions`, formData)
       .then(() => {
-        alert("登录成功！")
-        window.location.href = "/signin"
+        alert('登录成功！');
+        window.location.href = '/';
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
-          alert(JSON.stringify(error.response.data));
+          alert(error.response.data.error);
         }
       });
   };
@@ -46,23 +45,10 @@ const SignUp: NextPage = () => {
             }}
           />
         </div>
-        <div>
-          <span>确认密码</span>
-          <input
-            type="password"
-            value={formData.passwordConfirmation}
-            onChange={(e) => {
-              setFormData((data) => ({
-                ...data,
-                passwordConfirmation: e.target.value,
-              }));
-            }}
-          />
-        </div>
         <button type="submit"> 登录 </button>
       </form>
     </>
   );
 };
 
-export default SignUp;
+export default SignIn;

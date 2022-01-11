@@ -13,10 +13,10 @@ const users: NextApiHandler = async (req, res) => {
   user.username = username.trim();
   user.password = password;
   user.passwordConfirmation = passwordConfirmation;
-  const errorMessage = await user.validate();
-  if (errorMessage) {
+  const error = await user.validate();
+  if (error) {
     res.statusCode = 422;
-    res.write(JSON.stringify({ errorMessage }));
+    res.write(JSON.stringify({ error }));
   } else {
     const connection = await getDatabaseConnection();
     await connection.manager.save(user);
