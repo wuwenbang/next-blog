@@ -50,12 +50,9 @@ var _User = require("./entity/User");
             return manager.save(comment);
 
           case 10:
-            console.log(user);
-            console.log(post);
-            console.log(comment);
             connection.close();
 
-          case 14:
+          case 11:
           case "end":
             return _context.stop();
         }
