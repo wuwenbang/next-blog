@@ -15,7 +15,7 @@ const SignUp: NextPage = () => {
       .then(() => {})
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
-          alert(JSON.stringify(error.response.data));
+          alert(error.response.data.error);
         }
       });
   };
