@@ -17,7 +17,7 @@ const SignIn: NextPage<Props> = ({ user }) => {
       .post(`api/v1/sessions`, formData)
       .then(() => {
         alert('登录成功！');
-        window.location.href = '/';
+        // window.location.href = '/';
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
@@ -25,9 +25,10 @@ const SignIn: NextPage<Props> = ({ user }) => {
         }
       });
   };
+
   return (
     <>
-      <div>当前登录用户：{user.username}</div>
+      <div>当前登录用户：{user?.username}</div>
       <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <div>
