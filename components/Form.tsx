@@ -3,9 +3,9 @@ import { ChangeEventHandler, FC, FormEventHandler, ReactNode } from 'react';
 interface Props {
   fields: {
     label: string;
-    type: 'text' | 'password';
+    type: 'text' | 'password' | 'textarea';
     value: string;
-    onChange: ChangeEventHandler<HTMLInputElement>;
+    onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   }[];
   onSubmit: FormEventHandler<HTMLFormElement>;
   button: ReactNode;
@@ -14,14 +14,14 @@ interface Props {
 const Form: FC<Props> = ({ fields, onSubmit, button }) => {
   return (
     <form onSubmit={onSubmit}>
-      {fields.map((field) => (
-        <div key={field.label}>
-          <label>{field.label}</label>
-          <input
-            type={field.type}
-            value={field.value}
-            onChange={field.onChange}
-          />
+      {fields.map(({ label, type, value, onChange }) => (
+        <div key={label}>
+          <label>{label}</label>
+          {type === 'textarea' ? (
+            <textarea value={value} onChange={onChange} />
+          ) : (
+            <input type={type} value={value} onChange={onChange} />
+          )}
         </div>
       ))}
       {button}

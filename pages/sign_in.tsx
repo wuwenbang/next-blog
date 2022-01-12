@@ -7,6 +7,7 @@ import { User } from 'src/entity/User';
 interface Props {
   user: User | null;
 }
+
 const SignIn: NextPage<Props> = ({ user }) => {
   const [formData, setFormData] = useState({
     username: '',
