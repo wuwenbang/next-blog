@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import Form from 'components/Form';
 import { withSession } from 'lib/withSession';
 import { GetServerSideProps, NextPage } from 'next';
 import { FormEventHandler, useState } from 'react';
@@ -25,34 +26,35 @@ const SignIn: NextPage<Props> = ({ user }) => {
         }
       });
   };
-
+  const onChange = (key: string, value: string) => {
+    setFormData((data) => ({ ...data, [key]: value }));
+  };
   return (
     <>
       <div>当前登录用户：{user?.username}</div>
       <h1>登录</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <span>用户名</span>
-          <input
-            type="text"
-            value={formData.username}
-            onChange={(e) => {
-              setFormData((data) => ({ ...data, username: e.target.value }));
-            }}
-          />
-        </div>
-        <div>
-          <span>密码</span>
-          <input
-            type="password"
-            value={formData.password}
-            onChange={(e) => {
-              setFormData((data) => ({ ...data, password: e.target.value }));
-            }}
-          />
-        </div>
-        <button type="submit"> 登录 </button>
-      </form>
+      <Form
+        fields={[
+          {
+            label: '用户名',
+            type: 'text',
+            value: formData.username,
+            onChange: (e) => {
+              onChange('username', e.target.value);
+            },
+          },
+          {
+            label: '密码',
+            type: 'password',
+            value: formData.password,
+            onChange: (e) => {
+              onChange('password', e.target.value);
+            },
+          },
+        ]}
+        onSubmit={onSubmit}
+        button={<button type="submit"> 登录 </button>}
+      />
     </>
   );
 };

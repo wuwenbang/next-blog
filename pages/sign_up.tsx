@@ -14,7 +14,7 @@ const SignUp: NextPage = () => {
       .post(`api/v1/users`, formData)
       .then(() => {
         alert('注册成功！');
-        window.location.href = '/signin';
+        window.location.href = '/sign_in';
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
