@@ -18,6 +18,11 @@ const PostsNew: FC = () => {
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
           alert(error.response.data.error);
+        } else if (error.response.status === 401) {
+          window.alert('请先登录！');
+          window.location.href = `/sign_in?return_to=${encodeURIComponent(
+            window.location.pathname
+          )}`;
         }
       });
   };

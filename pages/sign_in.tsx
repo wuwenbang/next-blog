@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import Form from 'components/Form';
 import { withSession } from 'lib/withSession';
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/dist/client/router';
 import { FormEventHandler, useState } from 'react';
 import { User } from 'src/entity/User';
 interface Props {
@@ -13,13 +14,14 @@ const SignIn: NextPage<Props> = ({ user }) => {
     username: '',
     password: '',
   });
+  const { query } = useRouter();
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios
       .post(`api/v1/sessions`, formData)
       .then(() => {
         alert('登录成功！');
-        // window.location.href = '/';
+        location.href = query.return_to.toString();
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
