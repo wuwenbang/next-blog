@@ -10,7 +10,7 @@ const PostsNew: FC = () => {
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios
-      .post(`api/v1/posts`, formData)
+      .post(`/api/v1/posts`, formData)
       .then(() => {
         alert('提交成功！');
         // window.location.href = '/';
