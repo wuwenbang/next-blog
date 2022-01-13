@@ -9,7 +9,6 @@ const PostsDetail: NextPage<Props> = ({ post }) => {
   return (
     <div>
       <h2>
-        {post.id}
         {post.title}
       </h2>
       <article

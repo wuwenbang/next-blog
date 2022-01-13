@@ -13,7 +13,7 @@ const PostsNew: FC = () => {
       .post(`/api/v1/posts`, formData)
       .then(() => {
         alert('提交成功！');
-        // window.location.href = '/';
+        window.location.href = '/posts/';
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {

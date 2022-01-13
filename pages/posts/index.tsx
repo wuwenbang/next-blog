@@ -1,9 +1,9 @@
-import { getPosts } from 'lib/posts'
-import { GetStaticProps, NextPage } from 'next'
-import { Post } from 'src/entity/Post'
-import Link from 'next/link'
+import { GetServerSideProps, NextPage } from 'next';
+import { Post } from 'src/entity/Post';
+import Link from 'next/link';
+import getDatabaseConnection from 'lib/getDatabaseConnection';
 interface Props {
-  posts: Post[]
+  posts: Post[];
 }
 
 const PostsIndex: NextPage<Props> = ({ posts }) => {
@@ -15,23 +15,24 @@ const PostsIndex: NextPage<Props> = ({ posts }) => {
           <li key={post.id}>
             <Link href={`/posts/[id]`} as={`/posts/${post.id}`}>
               <a>
-                {post.title}：{post.content}
+                {post.id}：{post.title}
               </a>
             </Link>
           </li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default PostsIndex
+export default PostsIndex;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPosts()
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const connection = await getDatabaseConnection();
+  const posts = await connection.manager.find(Post);
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts)),
+      posts: posts ? JSON.parse(JSON.stringify(posts)) : null,
     },
-  }
-}
+  };
+};
