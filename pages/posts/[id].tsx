@@ -5,7 +5,7 @@ import { Post } from 'src/entity/Post';
 interface Props {
   post: Post;
 }
-const PostDetail: NextPage<Props> = ({ post }) => {
+const PostsDetail: NextPage<Props> = ({ post }) => {
   return (
     <div>
       <h2>
@@ -19,7 +19,7 @@ const PostDetail: NextPage<Props> = ({ post }) => {
   );
 };
 
-export default PostDetail;
+export default PostsDetail;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params.id as string;
