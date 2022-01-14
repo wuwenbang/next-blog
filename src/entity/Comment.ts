@@ -6,37 +6,37 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm'
-import { Post } from './Post'
-import { User } from './User'
+} from 'typeorm';
+import { Post } from './Post';
+import { User } from './User';
 
 @Entity('comments')
 export class Comment {
   @PrimaryGeneratedColumn('increment')
-  id: string
+  id: string;
 
   @Column('int')
-  authorId: number
+  authorId: number;
 
   @Column('int')
-  postId: number
+  postId: number;
 
   @Column('text')
-  content: string
+  content: string;
 
   @CreateDateColumn()
-  createTime: number
+  createTime: number;
 
   @UpdateDateColumn()
-  updateTime: number
+  updateTime: number;
 
-  @ManyToOne(() => Post, (post) => post.comments)
-  post: Post
+  @ManyToOne('Post', 'comments')
+  post: Post;
 
-  @ManyToOne(() => User, (author) => author.comments)
-  author: User
+  @ManyToOne('User', 'comments')
+  author: User;
 
   constructor(attributes: Partial<Comment>) {
-    Object.assign(this, attributes)
+    Object.assign(this, attributes);
   }
 }

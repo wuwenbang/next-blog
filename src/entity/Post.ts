@@ -2,9 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
@@ -30,12 +29,10 @@ export class Post {
   @UpdateDateColumn()
   updateTime: number
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  author: User
-
-  @OneToMany(() => Comment, (comment) => comment.post)
-  comments: Comment[]
+  @ManyToOne('User', 'posts')
+  author: User;
+  @OneToMany('Comment', 'post')
+  comments: Comment[];
 
   constructor(attributes: Partial<Post>) {
     Object.assign(this, attributes)

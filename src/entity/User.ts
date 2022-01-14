@@ -29,9 +29,9 @@ export class User {
   @UpdateDateColumn()
   updateTime: number;
 
-  @OneToMany(() => Post, (post) => post.author)
+  @OneToMany('Post', 'author')
   posts: Post[];
-  @OneToMany(() => Comment, (comment) => comment.author)
+  @OneToMany('Comment', 'author')
   comments: Comment[];
 
   constructor(attributes?: Partial<User>) {
@@ -58,7 +58,7 @@ export class User {
     }
     return errorMessage;
   }
-  
+
   @BeforeInsert()
   generatePasswordDigest() {
     this.passwordDigest = md5(this.password);
