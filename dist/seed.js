@@ -6,6 +6,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _md = _interopRequireDefault(require("md5"));
+
 require("reflect-metadata");
 
 var _typeorm = require("typeorm");
@@ -26,7 +28,7 @@ var _User = require("./entity/User");
             manager = connection.manager;
             user = new _User.User({
               username: 'user',
-              passwordDigest: '123'
+              passwordDigest: (0, _md["default"])('123')
             });
             _context.next = 4;
             return manager.save(user);
