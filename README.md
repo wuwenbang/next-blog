@@ -45,8 +45,13 @@ node dist/seed.js
 
 ## 阿里云部署
 
+- Docker 命令
+
 ```bash
+# build app image
 docker build . -t winter/node-web-app
+# create app container
 docker run --network=host -p 3000:3000 -d winter/node-web-app
+# create pgsql container
 docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 ```
