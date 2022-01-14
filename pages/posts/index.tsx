@@ -33,7 +33,7 @@ const PostsIndex: NextPage<Props> = ({ posts, count, pageNum, pageSize }) => {
 export default PostsIndex;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const pageSize = 1;
+  const pageSize = 10;
   const page = context.query.page ? parseInt(context.query.page.toString()) : 1;
   const pageNum = page > 1 ? page : 1;
   const connection = await getDatabaseConnection();
