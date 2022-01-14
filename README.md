@@ -3,7 +3,7 @@
 - 创建容器
 
 ```bash
-docker run -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+docker run --network=host -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 ```
 
 - 进入容器
@@ -41,4 +41,12 @@ yarn migration:run
 yarn dev
 # 数据填充
 node dist/seed.js
+```
+
+## 阿里云部署
+
+```bash
+docker build . -t winter/node-web-app
+docker run --network=host -p 3000:3000 -d winter/node-web-app
+docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 ```
