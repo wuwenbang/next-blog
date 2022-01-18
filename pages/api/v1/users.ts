@@ -1,4 +1,5 @@
 import getDatabaseConnection from 'lib/getDatabaseConnection';
+import md5 from 'md5';
 import { NextApiHandler } from 'next';
 import { User } from 'src/entity/User';
 
@@ -9,21 +10,36 @@ const users: NextApiHandler = async (req, res) => {
     passwordConfirmation: string;
   };
   res.setHeader('Content-Type', 'application/json');
-  const user = new User();
-  user.username = username.trim();
-  user.password = password;
-  user.passwordConfirmation = passwordConfirmation;
-  const error = await user.validate();
+  const connection = await getDatabaseConnection();
+  const found = await connection.manager.findOne(User, {
+    username,
+  });
+  let error = '';
+  if (username === '') {
+    error = '用户名为空';
+  } else if (password === '') {
+    error = '密码为空';
+  } else if (password !== passwordConfirmation) {
+    error = '密码不匹配';
+  } else if (found) {
+    error = '用户名已存在';
+  }
   if (error) {
     res.statusCode = 422;
     res.write(JSON.stringify({ error }));
   } else {
-    const connection = await getDatabaseConnection();
+    const user = new User();
+    user.username = username.trim();
+    user.passwordDigest = md5(password);
     await connection.manager.save(user);
     res.statusCode = 200;
-    const { id, username, createTime, updateTime, posts, comments } = user;
     res.write(
-      JSON.stringify({ id, username, createTime, updateTime, posts, comments })
+      JSON.stringify({
+        id: user.id,
+        username: user.username,
+        createTime: user.createTime,
+        updateTime: user.updateTime,
+      })
     );
   }
   res.end();

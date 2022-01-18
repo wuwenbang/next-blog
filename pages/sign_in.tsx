@@ -20,11 +20,12 @@ const SignIn: NextPage<Props> = ({ user }) => {
     axios
       .post(`api/v1/sessions`, formData)
       .then(() => {
-        alert('登录成功！');
-        location.href = query.return_to.toString();
+        // alert('登录成功！');
+        console.log('query.return_to.toString()', query.return_to?.toString());
+        location.href = query.return_to?.toString() ?? '/posts';
       })
       .catch((error: AxiosError) => {
-        if (error.response.status === 422) {
+        if (error.response?.status === 422) {
           alert(error.response.data.error);
         }
       });
@@ -64,7 +65,6 @@ const SignIn: NextPage<Props> = ({ user }) => {
 
 export default SignIn;
 export const getServerSideProps: GetServerSideProps = withSession(
-  //@ts-ignore
   async (context) => {
     //@ts-ignore
     const user = context.req.session.get('currentUser');

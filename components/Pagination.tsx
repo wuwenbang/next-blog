@@ -26,7 +26,7 @@ const Pagination: FC<Props> = ({
       list.push(i);
     }
     return list;
-  }, [pageSize]);
+  }, [pageTotal]);
 
   return (
     <footer>
