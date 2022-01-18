@@ -3,6 +3,9 @@ import { Post } from 'src/entity/Post';
 import Link from 'next/link';
 import getDatabaseConnection from 'lib/getDatabaseConnection';
 import Pagination from 'components/Pagination';
+import { Container } from 'components/Container';
+import styled from 'styled-components';
+
 interface Props {
   posts: Post[];
   count: number;
@@ -12,21 +15,21 @@ interface Props {
 
 const PostsIndex: NextPage<Props> = ({ posts, count, pageNum, pageSize }) => {
   return (
-    <div>
+    <Container>
       <h2>文章列表</h2>
-      <ul>
+      <List>
         {posts.map((post) => (
-          <li key={post.id}>
+          <Item key={post.id}>
             <Link href={`/posts/[id]`} as={`/posts/${post.id}`}>
               <a>
                 {post.id}：{post.title}
               </a>
             </Link>
-          </li>
+          </Item>
         ))}
-      </ul>
+      </List>
       <Pagination pageSize={pageSize} pageNum={pageNum} count={count} />
-    </div>
+    </Container>
   );
 };
 
@@ -50,3 +53,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+export const List = styled.ul`
+  padding: 16px;
+`;
+export const Item = styled.li`
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0px;
+  color: #000;
+  list-style-type: none;
+  &:hover {
+    color: dodgerblue;
+  }
+`;

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FC, memo, useMemo } from 'react';
+import styled from 'styled-components';
 
 interface Props {
   pageNum: number;
@@ -30,22 +31,28 @@ const Pagination: FC<Props> = ({
   return (
     <footer>
       <span>
-        共 {count} 篇文章，当前在第 {pageNum} / {pageTotal} 页。
+        第 {pageNum} / {pageTotal} 页
       </span>
       <span>
         {pageNum > 1 && (
           <Link href={urlMaker(pageNum - 1)}>
-            <a>上一页</a>
+            <PageNumber>上一页</PageNumber>
           </Link>
         )}
         {pageList.map((page) => (
           <Link key={page} href={urlMaker(page)}>
-            <a style={{ margin: 4, padding: 4 }}>{page}</a>
+            <PageNumber
+              style={
+                pageNum === page ? { color: 'dodgerblue' } : { color: '#333' }
+              }
+            >
+              {page}
+            </PageNumber>
           </Link>
         ))}
         {pageNum < pageTotal && (
           <Link href={urlMaker(pageNum + 1)}>
-            <a>下一页</a>
+            <PageNumber>下一页</PageNumber>
           </Link>
         )}
       </span>
@@ -54,3 +61,12 @@ const Pagination: FC<Props> = ({
 };
 
 export default memo(Pagination);
+
+export const PageNumber = styled.a`
+  padding: 4px;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    color: dodgerblue;
+  }
+`;
