@@ -4,7 +4,6 @@ import { NextApiHandler } from 'next';
 import { Post } from 'src/entity/Post';
 
 const posts: NextApiHandler = withSession(async (req, res) => {
-  console.log('here');
   if (req.method === 'POST') {
     const { title, content } = req.body;
     const user = req.session.get('currentUser');
@@ -35,7 +34,19 @@ const posts: NextApiHandler = withSession(async (req, res) => {
     post.content = content;
     await connection.manager.save(post);
     res.json(post);
+  } else if (req.method === 'DELETE') {
+    const { id } = req.body;
+    const user = req.session.get('currentUser');
+    if (!user) {
+      res.statusCode = 401;
+      res.end();
+      return;
+    }
+    const connection = await getDatabaseConnection();
+    const result = await connection.manager.delete(Post, id);
+    res.json(result);
   }
+  res.end();
 });
 
 export default posts;

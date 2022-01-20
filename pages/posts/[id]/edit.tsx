@@ -13,12 +13,13 @@ import {
   FieldTextarea,
   FieldWrapper,
 } from '../new';
+
 interface Props {
   id: string;
   post: Post;
   currentUser: User | null;
 }
-const PostsEdit: NextPage<Props> = ({ currentUser, id, post }) => {
+const PostsEdit: NextPage<Props> = ({  id, post }) => {
   const [formData, setFormData] = useState({
     title: post.title,
     content: post.content,
