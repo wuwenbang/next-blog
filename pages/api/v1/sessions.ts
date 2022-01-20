@@ -1,5 +1,5 @@
 import { NextApiHandler } from 'next';
-import { SignIn } from 'src/model/signin';
+import { SignIn } from 'src/model/SignIn';
 import { withSession } from 'lib/withSession';
 import { Session } from 'next-iron-session';
 

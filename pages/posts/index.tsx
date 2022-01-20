@@ -5,26 +5,37 @@ import getDatabaseConnection from 'lib/getDatabaseConnection';
 import Pagination from 'components/Pagination';
 import { Container } from 'components/Container';
 import styled from 'styled-components';
+import Linking from 'components/Linking';
+import { withSession } from 'lib/withSession';
+import { User } from 'src/entity/User';
 
 interface Props {
   posts: Post[];
   count: number;
   pageNum: number;
   pageSize: number;
+  currentUser: User | null;
 }
 
-const PostsIndex: NextPage<Props> = ({ posts, count, pageNum, pageSize }) => {
+const PostsIndex: NextPage<Props> = ({
+  posts,
+  count,
+  pageNum,
+  pageSize,
+  currentUser,
+}) => {
   return (
     <Container>
-      <h2>文章列表</h2>
+      <Header>
+        <h2>文章列表</h2>
+        {currentUser && <Linking href={`/posts/new`}>新增文章</Linking>}
+      </Header>
       <List>
         {posts.map((post) => (
           <Item key={post.id}>
-            <Link href={`/posts/[id]`} as={`/posts/${post.id}`}>
-              <a>
-                {post.id}：{post.title}
-              </a>
-            </Link>
+            <Linking href={`/posts/[id]`} as={`/posts/${post.id}`}>
+              {post.id}：{post.title}
+            </Linking>
           </Item>
         ))}
       </List>
@@ -35,7 +46,7 @@ const PostsIndex: NextPage<Props> = ({ posts, count, pageNum, pageSize }) => {
 
 export default PostsIndex;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = withSession(async (context) => {
   const pageSize = 10;
   const page = context.query.page ? parseInt(context.query.page.toString()) : 1;
   const pageNum = page > 1 ? page : 1;
@@ -44,19 +55,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     skip: pageSize * (pageNum - 1),
     take: pageSize,
   });
+  const currentUser = context.req.session.get('currentUser') || null;
   return {
     props: {
       posts: posts ? JSON.parse(JSON.stringify(posts)) : null,
       count,
       pageNum,
       pageSize,
+      currentUser,
     },
   };
-};
-export const List = styled.ul`
-  padding: 16px;
+});
+const List = styled.ul`
+  width: 600px;
+  padding: 0;
 `;
-export const Item = styled.li`
+const Item = styled.li`
   border-bottom: 1px solid #ddd;
   padding: 8px 0px;
   color: #000;
@@ -64,4 +78,11 @@ export const Item = styled.li`
   &:hover {
     color: dodgerblue;
   }
+`;
+
+const Header = styled.div`
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
