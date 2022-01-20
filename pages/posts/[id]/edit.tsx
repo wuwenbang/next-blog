@@ -1,19 +1,35 @@
 import axios, { AxiosError } from 'axios';
-import { FC, FormEventHandler, useState } from 'react';
-import styled from 'styled-components';
-
-const PostsNew: FC = () => {
+import getDatabaseConnection from 'lib/getDatabaseConnection';
+import { withSession } from 'lib/withSession';
+import { NextPage } from 'next';
+import { FormEventHandler, useState } from 'react';
+import { Post } from 'src/entity/Post';
+import { User } from 'src/entity/User';
+import {
+  Button,
+  Container,
+  FieldInput,
+  FieldLabel,
+  FieldTextarea,
+  FieldWrapper,
+} from '../new';
+interface Props {
+  id: string;
+  post: Post;
+  currentUser: User | null;
+}
+const PostsEdit: NextPage<Props> = ({ currentUser, id, post }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    content: '',
+    title: post.title,
+    content: post.content,
   });
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios
-      .post(`/api/v1/posts`, formData)
+      .patch(`/api/v1/posts`, { ...formData, id })
       .then(() => {
         alert('提交成功！');
-        window.location.href = '/posts/';
+        window.location.href = `/posts/${id}`;
       })
       .catch((error: AxiosError) => {
         if (error.response.status === 422) {
@@ -54,38 +70,18 @@ const PostsNew: FC = () => {
   );
 };
 
-export default PostsNew;
+export default PostsEdit;
 
-export const Container = styled.div`
-  padding: 16px;
-`;
-
-export const FieldWrapper = styled.div`
-  display: flex;
-  padding: 16px 0;
-`;
-
-export const FieldInput = styled.input`
-  width: 100%;
-  border: 1px solid #aaa;
-  height: 2em;
-  outline: none;
-`;
-
-export const FieldTextarea = styled.textarea`
-  width: 100%;
-  height: 60vh;
-  border: 1px solid #aaa;
-  outline: none;
-`;
-
-export const FieldLabel = styled.label`
-  white-space: nowrap;
-  width: 5em;
-`;
-
-export const Button = styled.button`
-  height: 2em;
-  width: 6em;
-  cursor: pointer;
-`;
+export const getServerSideProps = withSession(async (context) => {
+  const id = context.params.id as string;
+  const connection = await getDatabaseConnection();
+  const post = await connection.manager.findOne(Post, id);
+  const currentUser = context.req.session.get('currentUser') || null;
+  return {
+    props: {
+      id,
+      currentUser,
+      post: JSON.parse(JSON.stringify(post)),
+    },
+  };
+});

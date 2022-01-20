@@ -16,7 +16,7 @@ const PostsDetail: NextPage<Props> = ({ post, currentUser }) => {
     <Layout>
       <Title>{post.title}</Title>
       {currentUser && (
-        <Linking href="/posts/[id]/edit" as={`posts/${post.id}/edit`}>
+        <Linking href="/posts/[id]/edit" as={`/posts/${post.id}/edit`}>
           编辑文章
         </Linking>
       )}
@@ -43,13 +43,13 @@ export const getServerSideProps = withSession(async (context) => {
   };
 });
 
-export const Layout = styled.div`
+const Layout = styled.div`
   max-width: 1000px;
   margin: 0px auto;
   padding: 16px 0 64px 0;
 `;
 
-export const Title = styled.div`
+const Title = styled.div`
   font-size: 36px;
   font-weight: bold;
   border-bottom: 1px solid #333;
