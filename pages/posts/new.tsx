@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import Form from 'components/Form';
 import { FC, FormEventHandler, useState } from 'react';
+import styled from 'styled-components';
 
 const PostsNew: FC = () => {
   const [formData, setFormData] = useState({
@@ -26,36 +26,66 @@ const PostsNew: FC = () => {
         }
       });
   };
-  const onChange = (key: string, value: string) => {
-    setFormData((data) => ({ ...data, [key]: value }));
-  };
   return (
-    <>
+    <Container>
       <h2>新增文章</h2>
-      <Form
-        fields={[
-          {
-            label: '标题',
-            type: 'text',
-            value: formData.title,
-            onChange: (e) => {
-              onChange('title', e.target.value);
-            },
-          },
-          {
-            label: '内容',
-            type: 'textarea',
-            value: formData.content,
-            onChange: (e) => {
-              onChange('content', e.target.value);
-            },
-          },
-        ]}
-        onSubmit={onSubmit}
-        button={<button type="submit"> 新增 </button>}
-      />
-    </>
+      <form onSubmit={onSubmit}>
+        <FieldWrapper>
+          <FieldLabel>文章标题</FieldLabel>
+          <FieldInput
+            value={formData.title}
+            onChange={(e) => {
+              setFormData((data) => ({ ...data, title: e.target.value }));
+            }}
+          />
+        </FieldWrapper>
+        <FieldWrapper>
+          <FieldLabel>文章内容</FieldLabel>
+          <FieldTextarea
+            value={formData.content}
+            onChange={(e) => {
+              setFormData((data) => ({ ...data, content: e.target.value }));
+            }}
+          />
+        </FieldWrapper>
+        <Button type="submit"> 提交 </Button>
+      </form>
+    </Container>
   );
 };
 
 export default PostsNew;
+
+const Container = styled.div`
+  padding: 16px;
+`;
+
+const FieldWrapper = styled.div`
+  display: flex;
+  padding: 16px 0;
+`;
+
+const FieldInput = styled.input`
+  width: 100%;
+  border: 1px solid #aaa;
+  height: 2em;
+  outline: none;
+`;
+
+const FieldTextarea = styled.textarea`
+  width: 100%;
+  height: 60vh;
+  border: 1px solid #aaa;
+  outline: none;
+`;
+
+const FieldLabel = styled.label`
+  white-space: nowrap;
+  width: 5em;
+`;
+
+const Button = styled.button`
+  height: 2em;
+  width: 6em;
+  cursor: pointer;
+`;
