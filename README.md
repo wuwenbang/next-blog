@@ -55,3 +55,9 @@ docker run --network=host -p 3000:3000 -d winter/node-web-app
 # create pgsql container
 docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 ```
+
+- 上传 SSH
+
+```bash
+ssh-copy-id root@mars
+```
