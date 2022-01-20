@@ -16,7 +16,7 @@ const create = () => {
 const promise = (async function () {
   const manager = getConnectionManager();
   const current = manager.has('default') && manager.get('default');
-  if (current && current.isConnected) {
+  if (current) {
     await current.close();
   }
   return create();
