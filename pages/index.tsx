@@ -1,8 +1,6 @@
 import { Container } from 'components/Container';
 import Linking from 'components/Linking';
 import { NextPage } from 'next';
-import Link from 'next/link';
-import styled from 'styled-components';
 
 const Home: NextPage = () => {
   return (
