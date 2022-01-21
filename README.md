@@ -61,3 +61,9 @@ docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 
 ```bash
 ssh-copy-id root@mars
 ```
+
+- 自动部署
+
+```bash
+ssh winter@mars "sh /home/winter/app/bin/deploy.sh"
+```
