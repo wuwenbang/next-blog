@@ -6,7 +6,7 @@
    "password": "",
    "database": "blog_development",
    "synchronize": false,
-   "logging": false,
+   "logging": ["error"],
    "entities": [
       "dist/entity/**/*.js"
    ],
