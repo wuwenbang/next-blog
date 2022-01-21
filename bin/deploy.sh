@@ -1,7 +1,9 @@
+echo 'Deploy Start !'
 docker start 5c1 &&
 cd /home/winter/app/ &&
 git pull &&
 yarn install &&
+yarn migration:run &&
 docker build -t winter/node-web-app . &&
 docker kill app &&
 docker rm app &&

@@ -55,6 +55,7 @@ export const getServerSideProps = withSession(async (context) => {
     skip: pageSize * (pageNum - 1),
     take: pageSize,
   });
+  console.log(3);
   const currentUser = context.req.session.get('currentUser') || null;
   return {
     props: {

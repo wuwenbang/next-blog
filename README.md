@@ -66,4 +66,5 @@ ssh-copy-id root@mars
 
 ```bash
 ssh winter@mars "sh /home/winter/app/bin/deploy.sh"
+ssh winter@mars 'bash -s' < bin/deploy.sh
 ```
