@@ -5,10 +5,11 @@ import { User } from 'src/entity/User';
 import { Comment } from 'src/entity/Comment';
 import config from 'ormconfig.json';
 
-const create = () => {
+const create = async () => {
   // @ts-ignore
   return createConnection({
     ...config,
+    host: process.env.NODE_ENV === 'production' ? 'db' : 'localhost',
     entities: [Post, User, Comment],
   });
 };
@@ -22,6 +23,6 @@ const promise = (async function () {
   return create();
 })();
 
-export default function getDatabaseConnection() {
+export const getDatabaseConnection = async () => {
   return promise;
-}
+};

@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { Post } from 'src/entity/Post';
 import Link from 'next/link';
-import getDatabaseConnection from 'lib/getDatabaseConnection';
+import { getDatabaseConnection } from 'lib/getDatabaseConnection';
 import Pagination from 'components/Pagination';
 import { Container } from 'components/Container';
 import styled from 'styled-components';
@@ -55,7 +55,6 @@ export const getServerSideProps = withSession(async (context) => {
     skip: pageSize * (pageNum - 1),
     take: pageSize,
   });
-  console.log(3);
   const currentUser = context.req.session.get('currentUser') || null;
   return {
     props: {

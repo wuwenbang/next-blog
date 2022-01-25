@@ -12,7 +12,7 @@ import { Comment } from './Comment';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column('varchar')
   username: string;

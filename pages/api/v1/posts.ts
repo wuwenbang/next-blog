@@ -1,4 +1,4 @@
-import getDatabaseConnection from 'lib/getDatabaseConnection';
+import { getDatabaseConnection } from 'lib/getDatabaseConnection';
 import { withSession } from 'lib/withSession';
 import { NextApiHandler } from 'next';
 import { Post } from 'src/entity/Post';
@@ -29,7 +29,7 @@ const posts: NextApiHandler = withSession(async (req, res) => {
       return;
     }
     const connection = await getDatabaseConnection();
-    const post = await connection.manager.findOne(Post, { id });
+    const post = await connection.manager.findOne(Post, id);
     post.title = title;
     post.content = content;
     await connection.manager.save(post);

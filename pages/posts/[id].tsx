@@ -1,4 +1,4 @@
-import getDatabaseConnection from 'lib/getDatabaseConnection';
+import { getDatabaseConnection } from 'lib/getDatabaseConnection';
 import { NextPage } from 'next';
 import { Post } from 'src/entity/Post';
 import { marked } from 'marked';

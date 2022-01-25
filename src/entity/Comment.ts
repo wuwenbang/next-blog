@@ -13,7 +13,7 @@ import { User } from './User';
 @Entity('comments')
 export class Comment {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column('int')
   authorId: number;

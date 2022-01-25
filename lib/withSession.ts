@@ -1,4 +1,3 @@
-import { GetServerSideProps, NextApiHandler } from 'next';
 import { withIronSession } from 'next-iron-session';
 
 export function withSession(handler: any) {

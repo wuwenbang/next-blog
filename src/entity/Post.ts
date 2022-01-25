@@ -12,7 +12,7 @@ import { Comment } from './Comment'
 @Entity('posts')
 export class Post {
   @PrimaryGeneratedColumn('increment')
-  id: string
+  id: number
 
   @Column('int')
   authorId: number

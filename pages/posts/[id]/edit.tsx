@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import getDatabaseConnection from 'lib/getDatabaseConnection';
+import { getDatabaseConnection } from 'lib/getDatabaseConnection';
 import { withSession } from 'lib/withSession';
 import { NextPage } from 'next';
 import { FormEventHandler, useState } from 'react';

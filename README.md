@@ -3,7 +3,7 @@
 - 创建容器
 
 ```bash
-docker run -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+docker run --name psql -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=blog_development -d postgres:12.2
 ```
 
 - 进入容器
@@ -53,7 +53,7 @@ docker build . -t winter/node-web-app
 # create app container
 docker run --network=host -p 3000:3000 -d winter/node-web-app
 # create pgsql container
-docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+docker run --network=host -v /home/winter/blog-data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=blog_development -d postgres:12.2
 ```
 
 - 上传 SSH
@@ -65,6 +65,12 @@ ssh-copy-id root@mars
 - 自动部署
 
 ```bash
-ssh winter@mars "sh /home/winter/app/bin/deploy.sh"
+# ssh winter@mars "sh /home/winter/app/bin/deploy.sh"
 ssh winter@mars 'bash -s' < bin/deploy.sh
+```
+
+- Nginx
+
+```bash 
+docker run --name nginx --network=host -d nginx:1.19.1
 ```
